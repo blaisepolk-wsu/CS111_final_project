@@ -1,30 +1,4 @@
-"""
-Checklist:
-
-[n] Matrix class:
-- [y] constructor
-- [y] get_matrix
-- [y] get_transpose
-- [y] combine_rows
-- [y] scale_row
-- [y] swap_rows
-- [y] rref
-- [y] invert
-- [y] determinant
-- [y] null_space
-- [y] col_space
-- [y] eigenvalues
-- [y] eigenvectors
-- [n] diagonalization
-- [n] factorization
-- [n] nonnegative_factorization
-
-[n] sys_eq_calc()
-[y] msum()
-[y] mscale()
-[y] mmult() 
-"""
-
+# necessary imports
 import numpy as np
 import random as rand
 
@@ -442,29 +416,6 @@ class Matrix:
         pass
     
 
-def sys_eq_calc(coeff_matrix: np.ndarray, target: np.ndarray) -> list:
-    """
-    Calculate the solution to a system of equations
-    return: list of solutions
-    """
-
-    # check to make sure the matrices are not empty
-    if len(coeff_matrix) == 0 or len(coeff_matrix[0]) == 0 or len(target) == 0 or len(target[0]) == 0:
-        raise ValueError("Matrices must not be empty")
-
-    # check to make sure the matrices are compatible
-    if len(coeff_matrix[0]) != len(target[0]):
-        raise ValueError("Matrices must be compatible to solve a system of equations")
-
-    # solve
-    solutions = Matrix(coeff_matrix).rref(augment = target).tolist()
-
-    # case where there is a free variable
-    # TODO: implement this
-
-    return solutions
-
-
 def msum(matrix1: Matrix, matrix2: Matrix) -> Matrix:
     """
     return: sum of matrix1 & matrix2
@@ -520,19 +471,3 @@ def mmult(matrix1: Matrix, matrix2: Matrix) -> Matrix:
     
     # return as Matrix
     return Matrix(np.array(ret))
-
-
-def mseed(rows: int, cols: int, max_val: int, min_val: int, decimals = False) -> Matrix:
-    """
-    return: random matrix with specified rows and columns
-    """
-
-    # check to make sure the dimensions are valid
-    if rows <= 0 or cols <= 0:
-        raise ValueError("Matrix must have positive dimensions")
-
-    # return random matrix
-    if decimals:
-        return Matrix(np.array([[rand.randint(min_val, max_val) * rand.random() for _ in range(cols)] for _ in range(rows)]))
-    else:
-        return Matrix(np.array([[rand.randint(min_val, max_val) for _ in range(cols)] for _ in range(rows)]))
