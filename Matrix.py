@@ -128,8 +128,6 @@ class Matrix:
         modifies self.matrix in-place
         """
 
-        # TODO: reduced_form?
-
         if augment is None:
             augment = [[0] for _ in range(self.matrix_rows)]
 
@@ -291,12 +289,6 @@ class Matrix:
         # make sure Matrix is not empty
         if self.matrix_rows == 0 or self.matrix_cols == 0:
             raise ValueError("Matrix must not be empty to have a null space")
-
-        # check immediately if there can be a null space
-        if self.matrix_rows >= self.matrix_cols:
-            print(f'Matrix has no null space because it has more rows than columns')
-
-            return np.array([])
     
         # generate reduced matrix
         self.rref()
